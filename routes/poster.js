@@ -5,19 +5,13 @@ const userController = require('../controllers/user-controller');
 const constants = require('../constants/constants');
 const jwt_decode = require('jwt-decode'); 
 
-router.post('/create',async (req,res)=>{
+router.post('/add',async (req,res)=>{
+    console.log('addddd');
     try {
-        let { mapSize, bombCount } = req.body;
-        let cells = mapController.createMap(mapSize, mapSize);
-        cells = mapController.fillMap(cells, constants.messages.BOMB , req.body.bombCount );
-        cells = mapController.adjacentCellsValues(cells, constants.messages.BOMB);
-        req.map =  mapController.saveMap(mapSize, bombCount, cells);
-
-        var userProfile = jwt_decode(req.headers.authorization);
-        userController.updateUser(userProfile.userId, {map_id: req.map._id});
+        req.map =  await posterController.add(req.body);
         res.json(req.map);
     } catch (error) {
-        res.json({message : error})
+        res.json({message : error.message, xxx:1234})
     }
 });
 

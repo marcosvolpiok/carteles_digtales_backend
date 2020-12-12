@@ -1,4 +1,4 @@
-const MapModel = require('../models/MapModel');
+const PosterModel = require('../models/PosterModel');
 
 const createMap = (row, col) => {
   let outerArray = [];
@@ -57,21 +57,9 @@ const addOneNestedArrAdjacents = ( map, i,j, val) => {
   return map;
 }
 
-const saveMap = (mapSize, bombCount, cells, selectedCells=0, _id) => {
-  const data = {
-    mapSize,
-    bombCount,
-    selectedCells,
-    cells
-  };
-  let map = {}; 
-  if (_id){
-    map = MapModel.update({_id },{$set : data}).exec();
-  }else{
-    map = new MapModel(data);
+const add = async (data) => {
+    map = await new PosterModel(data);
     map.save();
-  }
-
   return map;
 }
 
@@ -89,6 +77,6 @@ module.exports = {
   createMap,
   fillMap,
   adjacentCellsValues,
-  saveMap,
+  add,
   getPoster
 }

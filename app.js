@@ -11,14 +11,14 @@ app.use(bodyParser.json());
 //IMPORT ROUTE
 const userRoute = require('./routes/user');
 const mapRoute = require('./routes/map');
-const mapPoster = require('./routes/poster');
+const routerPoster = require('./routes/poster');
 //const loginRoute = require('./routes/login');
 
 
 //INIT ROUTE
 app.use('/user',userRoute);
 app.use('/map',mapRoute);
-app.use('/poster',mapPoster);
+app.use('/poster',routerPoster);
 
 //MONGODB CONNECTION
 const mongoOptions = { useNewUrlParser: true };
