@@ -10,7 +10,7 @@ router.post('/add',async (req,res)=>{
         req.map =  await posterController.add(req.body);
         res.json(req.map);
     } catch (error) {
-        res.json({message : error.message, xxx:1234})
+        res.json({message : error.message})
     }
 });
 
@@ -34,7 +34,7 @@ router.get('/:id',async (req,res)=>{
         res.json(req.map);
 
     } catch (error) {
-        res.json({message : error})
+        res.json({message : error.message})
     }
 });
 

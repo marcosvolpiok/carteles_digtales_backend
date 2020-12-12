@@ -60,17 +60,21 @@ const addOneNestedArrAdjacents = ( map, i,j, val) => {
 const add = async (data) => {
     map = await new PosterModel(data);
     map.save();
+
+    return map;
+}
+
+const getPoster = async () => {
+  map = await PosterModel.find();
+
   return map;
 }
 
-const getPoster = (_id) => {
-  let map = {};
-  if (_id){
-    map = PosteModel.findOne().exec();
-  }
+const getPosterById = async (id) => {
+  map = await PosterModel.findOne({_id: id});
+
   return map;
 }
-
 
 
 module.exports = {
@@ -78,5 +82,6 @@ module.exports = {
   fillMap,
   adjacentCellsValues,
   add,
-  getPoster
+  getPoster,
+  getPosterById
 }
