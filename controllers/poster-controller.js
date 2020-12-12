@@ -58,24 +58,31 @@ const addOneNestedArrAdjacents = ( map, i,j, val) => {
 }
 
 const add = async (data) => {
-    map = await new PosterModel(data);
-    map.save();
+  const map = new PosterModel(data);
+  await map.save();
 
-    return map;
+  return map;
 }
 
 const getPoster = async () => {
-  map = await PosterModel.find();
+  const map = await PosterModel.find();
 
   return map;
 }
 
 const getPosterById = async (id) => {
-  map = await PosterModel.findOne({_id: id});
+  const map = await PosterModel.findOne({_id: id});
 
   return map;
 }
 
+
+
+const update = async (id, data) => {
+  const poster = await PosterModel.update({_id: id}, data);
+
+  return poster;
+}
 
 module.exports = {
   createMap,
@@ -83,5 +90,6 @@ module.exports = {
   adjacentCellsValues,
   add,
   getPoster,
-  getPosterById
+  getPosterById,
+  update
 }

@@ -38,14 +38,13 @@ router.get('/:id',async (req,res)=>{
     }
 });
 
-router.post('/update',async (req,res)=>{
+router.post('/update/:id',async (req,res)=>{
     try {
-        let { mapSize, bombCount, selectedCells, cells, _id } = req.body;
-        req.map = await mapController.saveMap(mapSize, bombCount, cells, selectedCells, _id);
-        res.json(req.map);
-
+        let { id } = req.params;
+        req.poster = await posterController.update(id, req.body);
+        res.json(req.poster);
     } catch (error) {
-        res.json({message : error})
+        res.json({message : error.message})
     }
 });
 
