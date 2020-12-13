@@ -4,6 +4,45 @@ const posterController = require('../controllers/poster-controller');
 const userController = require('../controllers/user-controller');
 const constants = require('../constants/constants');
 const jwt_decode = require('jwt-decode'); 
+const multer = require('multer');
+const upload = multer({ dest: 'upload/'});
+const type = upload.single('file');
+const fs = require('fs');
+const moment = require('moment');
+
+
+router.post('/addImage', type, async (req,res)=>{
+    try {
+        /*
+        req.map =  await posterController.add(req.body);
+        res.json(req.map);
+        */
+        //const dest = fs.createWriteStream(`upload\\example`);
+        if (!fs.existsSync(`upload/posters/`)){
+            fs.mkdirSync(`upload/posters/`);
+        }
+
+        if (!fs.existsSync(`upload/posters/${req.body.id}`)){
+            fs.mkdirSync(`upload/posters/${req.body.id}`);
+        }
+
+        if (!fs.existsSync(`upload/posters/${req.body.id}/${req.file.originalname}`)){
+            fs.mkdirSync(`upload/posters/${req.body.id}/${req.file.originalname}`);
+        }
+
+        
+
+        const src = fs.createReadStream(req.file.path);
+        const dest = fs.createWriteStream(`upload\\posters\\${req.body.id}\\${req.file.originalname}\\${moment().format("DD-MM-YY, h-mm-ss")} HS_${req.file.filename}_${req.file.originalname}`);
+        src.pipe(dest);
+        src.on('end', function() { res.json(req.file); });
+        src.on('error', function(err) { res.render('error'); });
+        
+    } catch (error) {
+        res.json({message : error.message})
+    }
+    
+});
 
 router.post('/add',async (req,res)=>{
     try {
