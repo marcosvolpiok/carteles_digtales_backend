@@ -84,6 +84,14 @@ const update = async (id, data) => {
   return poster;
 }
 
+const remove = async (id) => {
+  const poster = await PosterModel.remove({_id: id});
+
+  return poster;
+}
+
+
+
 module.exports = {
   createMap,
   fillMap,
@@ -91,5 +99,6 @@ module.exports = {
   add,
   getPoster,
   getPosterById,
-  update
+  update,
+  remove
 }
