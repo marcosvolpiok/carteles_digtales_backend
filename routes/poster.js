@@ -87,7 +87,7 @@ router.post('/update/:id',async (req,res)=>{
     }
 });
 
-router.get('/remove/:id',async (req,res)=>{
+router.delete('/remove/:id',async (req,res)=>{
     try {
         let { id } = req.params;
         req.poster = await posterController.remove(id);
