@@ -4,9 +4,13 @@ const mongoose = require('mongoose');
 require('dotenv').config();
 const bodyParser = require('body-parser');
 const cors = require('cors');
+const path = require('path');
+const serveStatic = require('serve-static')
 
 app.use(cors());
 app.use(bodyParser.json());
+
+app.use('/upload', serveStatic(path.join(__dirname, 'upload')));
 
 //IMPORT ROUTE
 const userRoute = require('./routes/user');
