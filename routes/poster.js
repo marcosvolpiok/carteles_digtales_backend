@@ -11,13 +11,9 @@ const fs = require('fs');
 const moment = require('moment');
 
 
-router.post('/addImage', type, async (req,res)=>{
+router.post('/addImage', type, (req,res)=>{
     try {
-        /*
-        req.map =  await posterController.add(req.body);
-        res.json(req.map);
-        */
-        //const dest = fs.createWriteStream(`upload\\example`);
+        const destPath=`upload\\posters\\${req.body.id}\\${req.file.originalname}\\${moment().format("DD-MM-YY, h-mm-ss")} HS_${req.file.filename}_${req.file.originalname}`;
         if (!fs.existsSync(`upload/posters/`)){
             fs.mkdirSync(`upload/posters/`);
         }
@@ -28,14 +24,16 @@ router.post('/addImage', type, async (req,res)=>{
 
         if (!fs.existsSync(`upload/posters/${req.body.id}/${req.file.originalname}`)){
             fs.mkdirSync(`upload/posters/${req.body.id}/${req.file.originalname}`);
-        }
-
-        
+        }        
 
         const src = fs.createReadStream(req.file.path);
-        const dest = fs.createWriteStream(`upload\\posters\\${req.body.id}\\${req.file.originalname}\\${moment().format("DD-MM-YY, h-mm-ss")} HS_${req.file.filename}_${req.file.originalname}`);
+        const dest = fs.createWriteStream(destPath);
         src.pipe(dest);
-        src.on('end', function() { res.json(req.file); });
+        src.on('end', async function() { 
+            //req.poster = await posterController.update(req.body.id, {file: destPath});
+            req.poster = await posterController.update(req.body.id, {file_path: destPath});
+            res.json(req.poster);
+        });
         src.on('error', function(err) { res.render('error'); });
         
     } catch (error) {
