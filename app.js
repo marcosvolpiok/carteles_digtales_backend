@@ -24,6 +24,11 @@ app.use('/user',userRoute);
 app.use('/map',mapRoute);
 app.use('/poster',routerPoster);
 
+//Errors
+app.use(function(err, req, res, next){
+  res.status(400).json({message: err.message});
+});
+
 //MONGODB CONNECTION
 const mongoOptions = { useNewUrlParser: true };
 if (process.env.MONGO_DB_USER) {
