@@ -5,12 +5,16 @@ require('dotenv').config();
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const path = require('path');
-const serveStatic = require('serve-static')
+const serveStatic = require('serve-static');
+const checkAuth = require('./middleware/checkAuth.js');
 
 app.use(cors());
 app.use(bodyParser.json());
 
 app.use('/upload', serveStatic(path.join(__dirname, 'upload')));
+
+//Middlewere
+app.use(checkAuth);
 
 //IMPORT ROUTE
 const userRoute = require('./routes/user');
