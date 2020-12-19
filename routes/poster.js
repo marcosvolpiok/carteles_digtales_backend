@@ -11,14 +11,7 @@ const type = upload.single('file');
 
 router.post('/addImage', type, posterController.addImage);
 
-router.post('/add',async (req, res)=>{
-    try {
-        req.map =  await posterController.add(req.body, res);
-        res.json(req.map);
-    } catch (error) {
-        res.json({message : error.message})
-    }
-});
+router.post('/add', posterController.add);
 
 
 router.get('/list',async (req,res)=>{

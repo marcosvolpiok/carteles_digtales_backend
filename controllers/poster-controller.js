@@ -34,14 +34,20 @@ const addImage = (req, res) => {
 }
 }
 
-const add = async (data, res) => {
-  data['user'] = res.userData.userId;
-
-  const map = new PosterModel(data);
-  await map.save();
-
-  return map;
+const add = async (req, res) => {
+  try {
+    data=req.body;
+    data['user'] = res.userData.userId;
+    const poster = new PosterModel(data);
+    await poster.save();
+  
+    res.json(poster);
+  } catch (error) {
+    res.json({message : error.message})
+  }
 }
+
+
 
 const getPoster = async (res) => {
   const map = await PosterModel.find({user: res.userData.userId});
