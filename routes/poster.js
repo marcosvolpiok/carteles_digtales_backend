@@ -42,9 +42,9 @@ router.post('/addImage', type, (req,res)=>{
     
 });
 
-router.post('/add',async (req,res)=>{
+router.post('/add',async (req, res)=>{
     try {
-        req.map =  await posterController.add(req.body);
+        req.map =  await posterController.add(req.body, res);
         res.json(req.map);
     } catch (error) {
         res.json({message : error.message})

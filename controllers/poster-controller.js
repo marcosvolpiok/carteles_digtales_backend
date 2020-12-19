@@ -57,7 +57,9 @@ const addOneNestedArrAdjacents = ( map, i,j, val) => {
   return map;
 }
 
-const add = async (data) => {
+const add = async (data, res) => {
+  data['user'] = res.userData.userId;
+
   const map = new PosterModel(data);
   await map.save();
 
