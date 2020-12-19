@@ -102,7 +102,7 @@ router.post('/login',(req,res)=>{
                 if(user){
                     verifyPassword(user,req,res)
                 }else{
-                    res.json({message : "Incorrect email or password..."})
+                    res.status(401).send({message : "Incorrect email or password..."})
                 }
             }).catch(error =>{
                 res.status(500).json({message : `error : ${error}` })
@@ -114,7 +114,7 @@ const verifyPassword = (user,req,res)=>{
         if(err) return res.status(500).json({message : err})
         else{
             if(result) return getToken(user,res)
-            else return res.json({message : "Authentication failed ..."})
+            else return res.status(401).send({message : "Authentication failed ..."})
         }
     })
 }
