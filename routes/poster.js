@@ -54,8 +54,7 @@ router.post('/add',async (req, res)=>{
 
 router.get('/list',async (req,res)=>{
     try {
-        let { id } = req.params;
-        req.map = await posterController.getPoster(id);
+        req.map = await posterController.getPoster(res);
         res.json(req.map);
 
     } catch (error) {

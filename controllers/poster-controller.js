@@ -66,8 +66,8 @@ const add = async (data, res) => {
   return map;
 }
 
-const getPoster = async () => {
-  const map = await PosterModel.find();
+const getPoster = async (res) => {
+  const map = await PosterModel.find({user: res.userData.userId});
 
   return map;
 }
