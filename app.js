@@ -18,14 +18,12 @@ app.use(checkAuth);
 
 //IMPORT ROUTE
 const userRoute = require('./routes/user');
-const mapRoute = require('./routes/map');
 const routerPoster = require('./routes/poster');
 //const loginRoute = require('./routes/login');
 
 
 //INIT ROUTE
 app.use('/user',userRoute);
-app.use('/map',mapRoute);
 app.use('/poster',routerPoster);
 
 //Errors

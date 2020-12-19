@@ -1,0 +1,374 @@
+{
+	"info": {
+		"_postman_id": "65b9b1ed-912d-4349-b157-3fed6beb14e1",
+		"name": "DigitalPosters",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "create user",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\":\"Juan Gonzalez\",\n    \"email\":\"1234@gmail.com\",\n    \"password\":\"1234\",\n    \"last_level\": 1\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{local_url}}/user/signup",
+					"host": [
+						"{{local_url}}"
+					],
+					"path": [
+						"user",
+						"signup"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "create user ok",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\":\"peter pan\",\n    \"email\":\"peter23@gmail.com\",\n    \"password\":\"assdfqw112\",\n    \"last_level\": 1\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/user/signup",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"user",
+								"signup"
+							]
+						}
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "230"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"e6-9cVaX6rq2hVMwSwM4eS/2bwxEmo\""
+						},
+						{
+							"key": "Date",
+							"value": "Tue, 20 Oct 2020 04:16:48 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"last_level\": \"0\",\n    \"status\": \"0\",\n    \"_id\": \"5f8e64b035b52f6e3641f42b\",\n    \"name\": \"peter pan\",\n    \"email\": \"peter23@gmail.com\",\n    \"password\": \"$2b$10$Prp3zNDj9XDqHlog1D3VOudaeRxkpDNOV90tqa9u3soQ7suHtgpTy\",\n    \"created\": \"2020-10-20T04:16:48.225Z\",\n    \"__v\": 0\n}"
+				}
+			]
+		},
+		{
+			"name": "login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"email\": \"1234@gmail.com\",\n    \"password\": \"1234\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{local_url}}/user/login/",
+					"host": [
+						"{{local_url}}"
+					],
+					"path": [
+						"user",
+						"login",
+						""
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "login ok",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"peter23@gmail.com\",\n    \"password\": \"assdfqw112\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/user/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"user",
+								"login"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "491"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"1eb-LxtO0jljpcXThC6WlBdVLcBfMMw\""
+						},
+						{
+							"key": "Date",
+							"value": "Tue, 20 Oct 2020 04:40:51 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"message\": \"Auth successful\",\n    \"user\": {\n        \"last_level\": \"0\",\n        \"status\": \"0\",\n        \"_id\": \"5f8e64b035b52f6e3641f42b\",\n        \"name\": \"peter pan\",\n        \"email\": \"peter23@gmail.com\",\n        \"password\": \"$2b$10$Prp3zNDj9XDqHlog1D3VOudaeRxkpDNOV90tqa9u3soQ7suHtgpTy\",\n        \"created\": \"2020-10-20T04:16:48.225Z\",\n        \"__v\": 0\n    },\n    \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InBldGVyMjNAZ21haWwuY29tIiwidXNlcklkIjoiNWY4ZTY0YjAzNWI1MmY2ZTM2NDFmNDJiIiwiaWF0IjoxNjAzMTY4ODUxLCJleHAiOjE2MDMxNzI0NTF9.QTycE9ZrAeQd9kk0gUwd5rOJP600Y5eSZ3PFuOiqPk4\"\n}"
+				}
+			]
+		},
+		{
+			"name": "poster/list",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6IjEyMzRAZ21haWwuY29tIiwidXNlcklkIjoiNWZkNTFhMGU5NWU0ZTQ1M2I4NTFlYzk1IiwiaWF0IjoxNjA4MzM2NTQ0LCJleHAiOjE2MDgzNDAxNDR9.Prq6awxJMlcyh-S4E9YudSTFr8Do5LgWAvaMkM73-kw",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{local_url}}/poster/list",
+					"host": [
+						"{{local_url}}"
+					],
+					"path": [
+						"poster",
+						"list"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "poster/add",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6IjEyMzRAZ21haWwuY29tIiwidXNlcklkIjoiNWZkNTFhMGU5NWU0ZTQ1M2I4NTFlYzk1IiwiaWF0IjoxNjA4MzM1ODM5LCJleHAiOjE2MDgzMzk0Mzl9.3dHV2Httbkl4GclzV0umwNmp8wTea1hgilyahgv3l9s",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"name\": \"Cartel 1\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{local_url}}/poster/add",
+					"host": [
+						"{{local_url}}"
+					],
+					"path": [
+						"poster",
+						"add"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "poster/getPosterById",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6IjEyMzRAZ21haWwuY29tIiwidXNlcklkIjoiNWZkNGZkYTQzMzQxZjU0ZWE4ZjExY2Y2IiwiaWF0IjoxNjA3Nzk0MDkyLCJleHAiOjE2MDc3OTc2OTJ9.WJm7Z9VsmXsxqkFXGnPJx2YWa0EPlHCwJ87AFyrqTWk",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"name\": \"Cartel 1\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{local_url}}/poster/5fd517ba13b6dc4fd4820b93",
+					"host": [
+						"{{local_url}}"
+					],
+					"path": [
+						"poster",
+						"5fd517ba13b6dc4fd4820b93"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "poster/update",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6IjEyMzRAZ21haWwuY29tIiwidXNlcklkIjoiNWZkNGZkYTQzMzQxZjU0ZWE4ZjExY2Y2IiwiaWF0IjoxNjA3Nzk0MDkyLCJleHAiOjE2MDc3OTc2OTJ9.WJm7Z9VsmXsxqkFXGnPJx2YWa0EPlHCwJ87AFyrqTWk",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"name\": \"Cartel MODIFICADO\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{local_url}}/poster/update/5fd517ba13b6dc4fd4820b93",
+					"host": [
+						"{{local_url}}"
+					],
+					"path": [
+						"poster",
+						"update",
+						"5fd517ba13b6dc4fd4820b93"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "poster/remove",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6IjEyMzRAZ21haWwuY29tIiwidXNlcklkIjoiNWZkNGZkYTQzMzQxZjU0ZWE4ZjExY2Y2IiwiaWF0IjoxNjA3Nzk0MDkyLCJleHAiOjE2MDc3OTc2OTJ9.WJm7Z9VsmXsxqkFXGnPJx2YWa0EPlHCwJ87AFyrqTWk",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"name\": \"Cartel MODIFICADO\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{local_url}}/poster/remove/5fd517ba13b6dc4fd4820b93",
+					"host": [
+						"{{local_url}}"
+					],
+					"path": [
+						"poster",
+						"remove",
+						"5fd517ba13b6dc4fd4820b93"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}
