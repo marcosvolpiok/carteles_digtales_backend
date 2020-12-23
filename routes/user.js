@@ -3,7 +3,7 @@ const router = express.Router();
 const bcrypt = require('bcrypt');
 const Joi = require('joi');
 const UserModel = require('../models/UserModel');
-const userController = require('../controllers/user-controller');
+const userController = require('../controllers/userController');
 var jwt = require('jsonwebtoken');
 const checkAuth = require('../middleware/checkAuth');
 
