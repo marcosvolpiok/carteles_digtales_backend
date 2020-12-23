@@ -49,10 +49,14 @@ const add = async (req, res) => {
 
 
 
-const getPoster = async (res) => {
-  const map = await PosterModel.find({user: res.userData.userId});
+const getPoster = async (req, res) => {
+  try {
+    req.map = await PosterModel.find({user: res.userData.userId});
+    res.json(req.map);
 
-  return map;
+  } catch (error) {
+      res.json({message : error})
+  }
 }
 
 const getPosterById = async (id) => {

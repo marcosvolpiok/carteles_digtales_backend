@@ -12,15 +12,7 @@ router.post('/addImage', type, posterController.addImage);
 router.post('/add', posterController.add);
 
 
-router.get('/list',async (req,res)=>{
-    try {
-        req.map = await posterController.getPoster(res);
-        res.json(req.map);
-
-    } catch (error) {
-        res.json({message : error})
-    }
-});
+router.get('/list', posterController.getPoster);
 
 
 router.get('/:id',async (req,res)=>{
