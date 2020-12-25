@@ -2,6 +2,9 @@ const moment = require('moment');
 const fs = require('fs');
 
 const PosterModel = require('../models/PosterModel');
+const posterService=require('../services/productService');
+const posterServiceOb=new posterService();
+
 
 const addImage = (req, res) => {
   try {
@@ -51,11 +54,11 @@ const add = async (req, res) => {
 
 const getPoster = async (req, res) => {
   try {
-    req.map = await PosterModel.find({user: res.userData.userId});
-    res.json(req.map);
+    const poster = await posterServiceOb.getPoster(req, res);
+    res.json(poster);
 
   } catch (error) {
-      res.json({message : error})
+      res.json({message : error.message})
   }
 }
 
