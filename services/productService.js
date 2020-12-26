@@ -6,13 +6,15 @@ class productService {
     
 
     getPoster = async (res) => {
-        //return 'example return';
-        //console.log(res);
-        console.log(res);
-
-        //console.log('useridddddddddddddddddd: ', res.userData.userId);
         const poster = await this.PosterModel.find({user: res.res.userData.userId});
-        
+
+        return poster;
+    }
+
+    getPosterById = async (req) => {
+        const { id } = req.params;
+        const poster = await this.PosterModel.findOne({_id: id});
+
         return poster;
     }
 }

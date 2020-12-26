@@ -14,17 +14,7 @@ router.post('/add', posterController.add);
 
 router.get('/list', posterController.getPoster);
 
-
-router.get('/:id',async (req,res)=>{
-    try {
-        let { id } = req.params;
-        req.map = await posterController.getPosterById(id);
-        res.json(req.map);
-
-    } catch (error) {
-        res.json({message : error.message})
-    }
-});
+router.get('/:id', posterController.getPosterById);
 
 router.post('/update/:id',async (req,res)=>{
     try {

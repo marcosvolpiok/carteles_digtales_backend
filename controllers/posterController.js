@@ -62,10 +62,13 @@ const getPoster = async (req, res) => {
   }
 }
 
-const getPosterById = async (id) => {
-  const map = await PosterModel.findOne({_id: id});
-
-  return map;
+const getPosterById = async (req, res) => {
+  try{
+    const poster = await posterServiceOb.getPosterById(req);
+    res.json(poster);
+  }catch(error){
+    res.json({message : error.message})
+  }
 }
 
 
