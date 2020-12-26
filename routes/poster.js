@@ -18,15 +18,7 @@ router.get('/:id', posterController.getPosterById);
 
 router.post('/update/:id', posterController.update);
 
-router.delete('/remove/:id',async (req,res)=>{
-    try {
-        let { id } = req.params;
-        req.poster = await posterController.remove(id);
-        res.json(req.poster);
-    } catch (error) {
-        res.json({message : error.message})
-    }
-});
+router.delete('/remove/:id', posterController.remove);
 
 
 module.exports = router;

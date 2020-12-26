@@ -24,6 +24,13 @@ class productService {
 
         return poster;
     }
+
+    remove = async (req) => {
+        let { id } = req.params;
+        const poster = await this.PosterModel.remove({_id: id});
+
+        return poster;
+    }
 }
 
 module.exports = productService;

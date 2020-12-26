@@ -71,8 +71,6 @@ const getPosterById = async (req, res) => {
   }
 }
 
-
-
 const update = async (req, res) => {
   try{
     const poster = await posterServiceOb.update(req);
@@ -83,9 +81,12 @@ const update = async (req, res) => {
 }
 
 const remove = async (id) => {
-  const poster = await PosterModel.remove({_id: id});
-
-  return poster;
+  try{
+    const poster = await posterServiceOb.remove(req);
+    res.json(poster);
+  }catch(error){
+    res.json({message : error.message})
+  }
 }
 
 
