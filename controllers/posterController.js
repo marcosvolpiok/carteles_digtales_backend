@@ -1,7 +1,3 @@
-const moment = require('moment');
-const fs = require('fs');
-
-const PosterModel = require('../models/PosterModel');
 const posterService=require('../services/productService');
 const posterServiceOb=new posterService();
 
