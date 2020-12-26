@@ -2,6 +2,8 @@ class productService {
     constructor(messageRepository) {
         this.messageRepository=messageRepository;
         this.PosterModel = require('../models/PosterModel');
+        this.moment = require('moment');
+        this.fs = require('fs');
     }
 
     add = async (req, res) => {
@@ -13,25 +15,28 @@ class productService {
         return poster;
     }  
     
-    addImage = async (res) => {
-        const destPath=`upload\\posters\\${req.body.id}\\${req.file.originalname}\\${moment().format("DD-MM-YY, h-mm-ss")} HS_${req.file.filename}_${req.file.originalname}`;
-        if (!fs.existsSync(`upload/posters/`)){
-            fs.mkdirSync(`upload/posters/`);
+    addImage = async (req, res) => {
+        const _this = this;
+        const _req= req;
+
+        const destPath=`upload\\posters\\${req.body.id}\\${req.file.originalname}\\${this.moment().format("DD-MM-YY, h-mm-ss")} HS_${req.file.filename}_${req.file.originalname}`;
+        if (!this.fs.existsSync(`upload/posters/`)){
+            this.fs.mkdirSync(`upload/posters/`);
         }
     
-        if (!fs.existsSync(`upload/posters/${req.body.id}`)){
-            fs.mkdirSync(`upload/posters/${req.body.id}`);
+        if (!this.fs.existsSync(`upload/posters/${req.body.id}`)){
+            this.fs.mkdirSync(`upload/posters/${req.body.id}`);
         }
     
-        if (!fs.existsSync(`upload/posters/${req.body.id}/${req.file.originalname}`)){
-            fs.mkdirSync(`upload/posters/${req.body.id}/${req.file.originalname}`);
+        if (!this.fs.existsSync(`upload/posters/${req.body.id}/${req.file.originalname}`)){
+            this.fs.mkdirSync(`upload/posters/${req.body.id}/${req.file.originalname}`);
         }        
     
-        const src = fs.createReadStream(req.file.path);
-        const dest = fs.createWriteStream(destPath);
+        const src = this.fs.createReadStream(req.file.path);
+        const dest = this.fs.createWriteStream(destPath);
         src.pipe(dest);
-        src.on('end', async function() { 
-            const poster = await PosterModel.update({_id: req.body.id}, {file_path: destPath});
+        src.on('end', async function() {
+            const poster = await _this.PosterModel.updateOne({_id: _req.body.id}, {file_path: destPath});
             return poster;
         });
         src.on('error', function(err) { throw new Error('An error occurred copying the image'); });
