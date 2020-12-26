@@ -7,7 +7,7 @@ const addImage = async (req, res) => {
     const poster = await posterServiceOb.addImage(req, res);
     res.json(poster);
   } catch (error) {
-      res.json({message : error.message})
+      res.status(500).send({message : error.message})
   }
 }
 
@@ -16,7 +16,7 @@ const add = async (req, res) => {
     const poster = await posterServiceOb.add(req, res);
     res.json(poster);
   } catch (error) {
-      res.json({message : error.message})
+      res.status(500).json({message : error.message})
   }
 }
 
@@ -27,7 +27,7 @@ const getPoster = async (req, res) => {
     const poster = await posterServiceOb.getPoster(req, res);
     res.json(poster);
   } catch (error) {
-      res.json({message : error.message})
+      res.status(500).json({message : error.message})
   }
 }
 
@@ -36,7 +36,7 @@ const getPosterById = async (req, res) => {
     const poster = await posterServiceOb.getPosterById(req);
     res.json(poster);
   }catch(error){
-    res.json({message : error.message})
+    res.status(500).json({message : error.message})
   }
 }
 
@@ -45,7 +45,7 @@ const update = async (req, res) => {
     const poster = await posterServiceOb.update(req);
     res.json(poster);
   }catch(error){
-    res.json({message : error.message})
+    res.status(500).json({message : error.message})
   }
 }
 
@@ -54,7 +54,7 @@ const remove = async (req, res) => {
     const poster = await posterServiceOb.remove(req);
     res.json(poster);
   }catch(error){
-    res.json({message : error.message})
+    res.status(500).json({message : error.message})
   }
 }
 
