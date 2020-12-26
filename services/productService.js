@@ -17,6 +17,13 @@ class productService {
 
         return poster;
     }
+
+    update = async (req) => {
+        let { id } = req.params;
+        const poster = await this.PosterModel.update({_id: id}, req.body);
+
+        return poster;
+    }
 }
 
 module.exports = productService;

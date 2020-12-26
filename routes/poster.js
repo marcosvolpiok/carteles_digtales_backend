@@ -16,15 +16,7 @@ router.get('/list', posterController.getPoster);
 
 router.get('/:id', posterController.getPosterById);
 
-router.post('/update/:id',async (req,res)=>{
-    try {
-        let { id } = req.params;
-        req.poster = await posterController.update(id, req.body);
-        res.json(req.poster);
-    } catch (error) {
-        res.json({message : error.message})
-    }
-});
+router.post('/update/:id', posterController.update);
 
 router.delete('/remove/:id',async (req,res)=>{
     try {
