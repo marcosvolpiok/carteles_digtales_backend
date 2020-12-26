@@ -1,7 +1,6 @@
 const express = require('express');
 const router = express.Router();
 const posterController = require('../controllers/posterController');
-const jwt_decode = require('jwt-decode'); 
 const multer = require('multer');
 const upload = multer({ dest: 'upload/'});
 const type = upload.single('file');

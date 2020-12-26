@@ -39,14 +39,10 @@ const addImage = (req, res) => {
 
 const add = async (req, res) => {
   try {
-    data=req.body;
-    data['user'] = res.userData.userId;
-    const poster = new PosterModel(data);
-    await poster.save();
-  
+    const poster = await posterServiceOb.add(res);
     res.json(poster);
   } catch (error) {
-    res.json({message : error.message})
+      res.json({message : error.message})
   }
 }
 
@@ -56,7 +52,6 @@ const getPoster = async (req, res) => {
   try {
     const poster = await posterServiceOb.getPoster(req, res);
     res.json(poster);
-
   } catch (error) {
       res.json({message : error.message})
   }
