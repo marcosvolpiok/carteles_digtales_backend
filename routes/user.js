@@ -8,14 +8,7 @@ var jwt = require('jsonwebtoken');
 const checkAuth = require('../middleware/checkAuth');
 
 //GET ALL USERS
-router.get('/', checkAuth, async (req,res)=>{
-    try {
-        const users = await UserModel.find();
-        res.status(201).json(users);
-    } catch (error) {
-        res.status(500).json({message: error})
-    }
-});
+router.get('/', checkAuth, userController.list);
 
 //CREATE NEW USER
 router.post('/signup', signup, async (req,res)=>{

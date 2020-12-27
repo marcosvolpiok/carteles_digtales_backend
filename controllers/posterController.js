@@ -1,4 +1,4 @@
-const posterService=require('../services/productService');
+const posterService=require('../services/posterService');
 const posterServiceOb=new posterService();
 
 
