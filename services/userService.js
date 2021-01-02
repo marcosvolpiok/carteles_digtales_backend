@@ -34,13 +34,19 @@ class userService {
            const createdUser = await user.save();
 
            return {status: 200, data: createdUser}
-           //res.status(201).json(createdUser);
         } catch (error) {
             throw new Error(error);
-            //return({status: 500, error});
-            //res.status(500).json({message : error.message})
         }
     }
+
+    updateUser = async (req) => {
+        UserModel.updateMany({_id : req.params.user_id},{$set : req.body}).exec()
+          .then(()=>{
+              return data
+          }).catch(err =>{
+              return {message : err}
+          })
+      }
 }  
 
 

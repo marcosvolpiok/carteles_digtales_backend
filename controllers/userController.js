@@ -3,12 +3,12 @@ const userService=require('../services/userService');
 const userServiceOb=new userService();
 
 const updateUser = async (userId, data) => {
-  UserModel.updateMany({_id : userId},{$set : data}).exec()
-    .then(()=>{
-        return data
-    }).catch(err =>{
-        return {message : err}
-    })
+  try {
+    const user = await userServiceOb.update(req);
+    res.json(user);
+  } catch (error) {
+      res.status(500).send({message : error.message})
+  }
 }
 
 const list = async (req, res) => {
