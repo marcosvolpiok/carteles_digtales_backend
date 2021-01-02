@@ -72,39 +72,6 @@ router.delete('/:userID',checkAuth,async (req,res)=>{
     }
 });
 
-router.post('/login',(req,res)=>{
-    UserModel.findOne({email : req.body.email }).exec()
-        .then(user =>{
-                if(user){
-                    verifyPassword(user,req,res)
-                }else{
-                    res.status(401).send({message : "Incorrect email or password..."})
-                }
-            }).catch(error =>{
-                res.status(500).json({message : `error : ${error}` })
-        })
-})
-//VERIFY PASSWORD
-const verifyPassword = (user,req,res)=>{
-    bcrypt.compare(req.body.password,user.password,(err,result)=>{
-        if(err) return res.status(500).json({message : err})
-        else{
-            if(result) return getToken(user,res)
-            else return res.status(401).send({message : "Authentication failed ..."})
-        }
-    })
-}
-
-const getToken = (user,res) =>{
-    const token = jwt.sign({ email: user.email, userId : user._id,},
-        process.env.JWT_KEY, { expiresIn:"1h"})
-    res.json({
-        message : "Auth successful",
-        user,
-        token : token
-    });
-}
-
-
+router.post('/login', userController.login)
 
 module.exports = router;

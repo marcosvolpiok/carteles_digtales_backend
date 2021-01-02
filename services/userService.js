@@ -6,6 +6,8 @@ class userService {
         this.fs = require('fs');
         this.jwt = require('jsonwebtoken');
         this.bcrypt = require('bcrypt');
+        this.verifyPassword = require('../helpers/loginHelper');
+        this.getToken = require('../helpers/loginHelper');
     }
 
     list = async ()=>{
@@ -40,13 +42,26 @@ class userService {
     }
 
     updateUser = async (req) => {
-        UserModel.updateMany({_id : req.params.user_id},{$set : req.body}).exec()
+        this.UserModel.updateMany({_id : req.params.user_id},{$set : req.body}).exec()
           .then(()=>{
               return data
           }).catch(err =>{
               return {message : err}
           })
       }
+
+    login = async(req, res)=>{
+        this.UserModel.findOne({email : req.body.email }).exec()
+        .then(user =>{
+                if(user){
+                    this.verifyPassword(user,req,res)
+                }else{
+                    res.status(401).send({message : "Incorrect email or password..."})
+                }
+            }).catch(error =>{
+                res.status(500).json({message : `error : ${error}` })
+        })
+    }
 }  
 
 

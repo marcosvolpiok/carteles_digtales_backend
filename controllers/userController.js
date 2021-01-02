@@ -29,6 +29,15 @@ const signup = async (req, res) => {
   }
 }
 
+const login = async (req, res) => {
+  try {
+    const user = await userServiceOb.login(req, res);
+    res.status(user.status).send(user.data);
+  } catch (error) {
+      res.status(500).send({message : error.message})
+  }
+}
+
 module.exports = {
-  updateUser, list, signup
+  updateUser, list, signup, login
 }
