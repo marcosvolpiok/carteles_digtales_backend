@@ -20,6 +20,15 @@ const list = async (req, res) => {
   }
 }
 
+const signup = async (req, res) => {
+  try {
+    const user = await userServiceOb.signup(req, res);
+    res.status(user.status).send(user.data);
+  } catch (error) {
+      res.status(500).send({message : error.message})
+  }
+}
+
 module.exports = {
-  updateUser, list
+  updateUser, list, signup
 }

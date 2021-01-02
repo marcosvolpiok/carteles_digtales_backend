@@ -8,27 +8,10 @@ var jwt = require('jsonwebtoken');
 const checkAuth = require('../middleware/checkAuth');
 
 //GET ALL USERS
-router.get('/', checkAuth, userController.list);
+router.get('/', /*checkAuth,*/ userController.list);
 
 //CREATE NEW USER
-router.post('/signup', signup, async (req,res)=>{
-    try {
-        const existingUser = await UserModel.find({email:req.body.email})
-        if(existingUser.length !== 0){
-            return res.status(409).json({message : "The User does exist"})
-        }
-        const hashPassword = await bcrypt.hash(req.body.password, 10);
-        const user = new UserModel({
-            name: req.body.name,
-            email: req.body.email,
-            password: hashPassword,
-        });
-       const createdUser = await user.save();
-       res.status(201).json(createdUser);
-    } catch (error) {
-        res.status(500).json({message : error.message})
-    }
-});
+router.post('/signup', signup, userController.signup);
 
 function signup(req, res, next){
     const schema = Joi.object({
