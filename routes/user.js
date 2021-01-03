@@ -48,32 +48,10 @@ function validateRequest(req, next, schema) {
 }
 
 
-
-//UPDATE USER INFO
-/*
-router.put('/:user_id',checkAuth, async (req,res)=>{
-    try {
-        await userController.updateUser(req.params.user_id, req.body);
-        res.status(200).json({ mesage:"user updated"});
-    } catch (error) {
-        res.status(500).json({message : error})
-    }
-});
-*/
 router.put('/:user_id',checkAuth, userController.update);
 
 //DELETE USER
-router.delete('/:userID',checkAuth,async (req,res)=>{
-    try {
-        const deletedUser =  await UserModel.deleteOne({ _id : req.params.userID})
-        res.status(200).json({
-            message : 'User been deleted ...',
-            data : deletedUser,
-        })
-    } catch (error) {
-        res.status(500).json({message : error})
-    }
-});
+router.delete('/:userID', checkAuth, userController.deleteUser);
 
 router.post('/login', userController.login)
 

@@ -44,7 +44,14 @@ class userService {
     updateUser = async (req) => {
         const user = await this.UserModel.updateMany({_id : req.params.user_id},{$set : req.body}).exec();
         return user;
-      }
+    }
+
+    remove = async (req) => {
+        let { userID } = req.params;
+        console.log('dddddddddddddddddddddddddddddd', userID);
+        const user = await this.UserModel.remove({_id: userID}).exec();
+        return user;
+    }
 
     login = async(req, res)=>{
         const user = await this.UserModel.findOne({email : req.body.email }).exec();

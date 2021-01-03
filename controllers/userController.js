@@ -12,6 +12,15 @@ const update = async (req, res) => {
   }
 }
 
+const deleteUser = async (req, res) => {
+  try {
+    const user = await userServiceOb.remove(req);
+    res.json(user);
+  } catch (error) {
+      res.status(500).send({message : error.message})
+  }
+}
+
 const list = async (req, res) => {
   try {
     const user = await userServiceOb.list();
@@ -39,5 +48,5 @@ const login = async (req, res) => {
 }
 
 module.exports = {
-  update, list, signup, login
+  update, list, signup, login, deleteUser
 }
