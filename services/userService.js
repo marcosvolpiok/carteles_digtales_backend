@@ -6,8 +6,9 @@ class userService {
         this.fs = require('fs');
         this.jwt = require('jsonwebtoken');
         this.bcrypt = require('bcrypt');
-        this.verifyPassword = require('../helpers/loginHelper');
+        this.verifyPassword = require('../helpers/loginHelper').verifyPassword;
         this.getToken = require('../helpers/loginHelper');
+        const _this=this;
     }
 
     list = async ()=>{
@@ -24,7 +25,6 @@ class userService {
         try {
             const existingUser = await this.UserModel.find({email:req.body.email})
             if(existingUser.length !== 0){
-                //return res.status(409).json({message : "The User does exist"})
                 return {status: 409, message: "The User does exist"};
             }
             const hashPassword = await this.bcrypt.hash(req.body.password, 10);
@@ -51,16 +51,16 @@ class userService {
       }
 
     login = async(req, res)=>{
-        this.UserModel.findOne({email : req.body.email }).exec()
-        .then(user =>{
-                if(user){
-                    this.verifyPassword(user,req,res)
-                }else{
-                    res.status(401).send({message : "Incorrect email or password..."})
-                }
-            }).catch(error =>{
-                res.status(500).json({message : `error : ${error}` })
-        })
+        const user = await this.UserModel.findOne({email : req.body.email }).exec();
+        try{
+        if(user){
+            const rest = this.verifyPassword(user,req,res);
+        }else{
+            return({status: 401, message: 'Incorrect email or password.'});
+        }
+        }catch(e){
+            console.log('errrrrrrrrrrrrorrrrrrrrrrrr', e.message, e.stack);
+        }
     }
 }  
 

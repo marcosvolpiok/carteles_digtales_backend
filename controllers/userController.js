@@ -1,3 +1,4 @@
+const e = require('express');
 const UserModel = require('../models/UserModel');
 const userService=require('../services/userService');
 const userServiceOb=new userService();
@@ -32,9 +33,8 @@ const signup = async (req, res) => {
 const login = async (req, res) => {
   try {
     const user = await userServiceOb.login(req, res);
-    res.status(user.status).send(user.data);
   } catch (error) {
-      res.status(500).send({message : error.message})
+    res.status(500).send({message : error.message, stack: e.stack, zzzz:44444})
   }
 }
 

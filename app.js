@@ -44,7 +44,7 @@ if (process.env.MONGO_DB_USER) {
 //export JWT_KEY=1234
 //mongoose.connect('mongodb+srv://admin-user:AO8Cs8KLAOqRMwvU@cluster0.qdhog.mongodb.net/minesweeper?retryWrites=true&w=majority')
 mongoose.connect(`${process.env.DATABASE_URL}`,mongoOptions)
-    .then(() => console.log("MongoDB conected ..."))
+    //.then(() => console.log("MongoDB conected ..."))
     .catch(err => console.log(err));
 //START SERVER
 app.listen(3050)
