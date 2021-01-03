@@ -50,6 +50,7 @@ function validateRequest(req, next, schema) {
 
 
 //UPDATE USER INFO
+/*
 router.put('/:user_id',checkAuth, async (req,res)=>{
     try {
         await userController.updateUser(req.params.user_id, req.body);
@@ -58,6 +59,8 @@ router.put('/:user_id',checkAuth, async (req,res)=>{
         res.status(500).json({message : error})
     }
 });
+*/
+router.put('/:user_id',checkAuth, userController.update);
 
 //DELETE USER
 router.delete('/:userID',checkAuth,async (req,res)=>{

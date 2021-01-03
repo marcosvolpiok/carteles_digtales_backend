@@ -3,9 +3,9 @@ const UserModel = require('../models/UserModel');
 const userService=require('../services/userService');
 const userServiceOb=new userService();
 
-const updateUser = async (userId, data) => {
+const update = async (req, res) => {
   try {
-    const user = await userServiceOb.update(req);
+    const user = await userServiceOb.updateUser(req);
     res.json(user);
   } catch (error) {
       res.status(500).send({message : error.message})
@@ -39,5 +39,5 @@ const login = async (req, res) => {
 }
 
 module.exports = {
-  updateUser, list, signup, login
+  update, list, signup, login
 }

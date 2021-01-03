@@ -42,12 +42,8 @@ class userService {
     }
 
     updateUser = async (req) => {
-        this.UserModel.updateMany({_id : req.params.user_id},{$set : req.body}).exec()
-          .then(()=>{
-              return data
-          }).catch(err =>{
-              return {message : err}
-          })
+        const user = await this.UserModel.updateMany({_id : req.params.user_id},{$set : req.body}).exec();
+        return user;
       }
 
     login = async(req, res)=>{
