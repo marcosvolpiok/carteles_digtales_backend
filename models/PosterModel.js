@@ -7,7 +7,19 @@ const PosterSchema = mongoose.Schema({
     user: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'users'
-    }
+    },
+    init_time: String,
+    end_time: String
+});
+
+
+
+PosterSchema.post('updateOne', function(next){
+    const model = this.model(this.constructor.modelName);
+    model.emit('created', this);
+    console.log('****************UPDATEADOOOOOOOOOOOOOOOOO');
+
+        
 })
 
 module.exports = mongoose.model('poster', PosterSchema);
