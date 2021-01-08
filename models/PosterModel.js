@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const {io} = require('../app');
 
 const PosterSchema = mongoose.Schema({
     name: String,
@@ -12,14 +13,12 @@ const PosterSchema = mongoose.Schema({
     end_time: String
 });
 
-
-
+/*
 PosterSchema.post('updateOne', function(next){
     const model = this.model(this.constructor.modelName);
-    model.emit('created', this);
     console.log('****************UPDATEADOOOOOOOOOOOOOOOOO');
-
-        
+    //io.emit('action', 'ALGOOOOOOOOOOOOOOOOOO');
 })
+*/
 
 module.exports = mongoose.model('poster', PosterSchema);

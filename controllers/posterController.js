@@ -42,7 +42,7 @@ const getPosterById = async (req, res) => {
 
 const update = async (req, res) => {
   try{
-    const poster = await posterServiceOb.update(req);
+    const poster = await posterServiceOb.update(req, res);
     res.json(poster);
   }catch(error){
     res.status(500).json({message : error.message})

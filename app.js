@@ -1,5 +1,6 @@
 const express = require('express');
 const app = express();
+
 const mongoose = require('mongoose');
 require('dotenv').config();
 const bodyParser = require('body-parser');
@@ -7,7 +8,6 @@ const cors = require('cors');
 const path = require('path');
 const serveStatic = require('serve-static');
 const checkAuth = require('./middleware/checkAuth.js');
-
 app.use(cors());
 app.use(bodyParser.json());
 
@@ -15,6 +15,8 @@ app.use('/upload', serveStatic(path.join(__dirname, 'upload')));
 
 //Middlewere
 app.use(checkAuth);
+
+
 
 //IMPORT ROUTE
 const userRoute = require('./routes/user');
@@ -47,4 +49,16 @@ mongoose.connect(`${process.env.DATABASE_URL}`,mongoOptions)
     //.then(() => console.log("MongoDB conected ..."))
     .catch(err => console.log(err));
 //START SERVER
-app.listen(3050)
+
+//import express from 'express';
+const Server=require('socket.io');
+
+const server = app.listen(3050);
+io = new Server(server, { cors: { origin: '*' } });
+
+io.on('connection', function(socket){
+  socket.on('action', function(action){
+    io.emit('action', 'CONECTADO');
+    console.log('Action', action);
+  });
+});
