@@ -1,4 +1,4 @@
-class productService {
+class posterService {
     constructor(messageRepository) {
         this.messageRepository=messageRepository;
         const posterRepository = require('../repository/posterRepository');
@@ -10,10 +10,10 @@ class productService {
     add = async (req, res) => {
         const data=req.body;
         data['user'] = res.userData.userId;
+        const PosterRepository = this.PosterRepository.add(data);
+        // await PosterRepository.save();
         
-        await poster.save();
-        
-        return poster;
+        return PosterRepository;
     }  
     
     addImage = async (req, res) => {
@@ -88,4 +88,4 @@ class productService {
     }
 }
 
-module.exports = productService;
+module.exports = posterService;

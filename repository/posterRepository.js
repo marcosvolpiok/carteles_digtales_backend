@@ -1,14 +1,16 @@
 const Interface = require('es6-interface');
 const baseRepository = require('./baseRepository');
-const poster = require('../models/PosterModel');
+const Poster = require('../models/PosterModel');
 
 class posterRepository extends Interface(baseRepository) {
     constructor() {
-        // super();
+        super();
         this.poster=new Poster(); 
     }
 
     async add (params) {
+      const poster = new Poster(data);
+      return await poster.save();
     }
 
     async list (){
