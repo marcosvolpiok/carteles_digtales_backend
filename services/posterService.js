@@ -62,7 +62,7 @@ class productService {
 
     getPosterByUserId = async (req) => {
         const { id } = req.params;
-        const poster = await this.PosterModel.findOne({user: id});
+        const poster = await this.PosterRepository.findOne({user: id});
 
         return poster;
     }
