@@ -1,7 +1,7 @@
 class productService {
     constructor(messageRepository) {
         this.messageRepository=messageRepository;
-        this.PosterModel = require('../models/PosterModel');
+        this.PosterRepository = require('../repository/posterRepository');
         this.moment = require('moment');
         this.fs = require('fs');
     }
@@ -9,7 +9,7 @@ class productService {
     add = async (req, res) => {
         const data=req.body;
         data['user'] = res.userData.userId;
-        const poster = new this.PosterModel(data);
+        const poster = new this.PosterRepository(data);
         await poster.save();
         
         return poster;
@@ -36,7 +36,11 @@ class productService {
         const dest = this.fs.createWriteStream(destPath);
         src.pipe(dest);
         src.on('end', async function() {
-            const poster = await _this.PosterModel.updateOne({_id: _req.body.id}, {file_path: destPath});
+            const params = {
+                where: {_id: _req.body.id},
+                set: {file_path: destPath}
+            };
+            const poster = await _this.PosterRepository.update(params);
             return poster;
         });
         src.on('error', function(err) { throw new Error('An error occurred copying the image'); });
@@ -44,14 +48,14 @@ class productService {
 
 
     getPoster = async (res) => {
-        const poster = await this.PosterModel.find({user: res.res.userData.userId});
+        const poster = await this.PosterRepository.find({user: res.res.userData.userId});
 
         return poster;
     }
 
     getPosterById = async (req) => {
         const { id } = req.params;
-        const poster = await this.PosterModel.findOne({_id: id});
+        const poster = await this.PosterRepository.findOne({_id: id});
 
         return poster;
     }
@@ -65,7 +69,7 @@ class productService {
 
     update = async (req, res) => {
         let { id } = req.params;
-        const poster = await this.PosterModel.updateOne({_id: id}, req.body);
+        const poster = await this.PosterRepository.update({_id: id}, req.body);
         global.io.emit('action', 'ALGOOOOOOOOOOOOOOOOOO');
 
         return poster;
@@ -73,7 +77,7 @@ class productService {
 
     remove = async (req) => {
         let { id } = req.params;
-        const poster = await this.PosterModel.remove({_id: id});
+        const poster = await this.PosterRepository.remove({_id: id});
 
         return poster;
     }
