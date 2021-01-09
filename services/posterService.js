@@ -70,7 +70,11 @@ class productService {
 
     update = async (req, res) => {
         let { id } = req.params;
-        const poster = await this.PosterRepository.update({_id: id}, req.body);
+        const params = {
+            where: {_id: id},
+            set: req.body
+        };
+        const poster = await this.PosterRepository.update(params);
         global.io.emit('action', 'ALGOOOOOOOOOOOOOOOOOO');
 
         return poster;

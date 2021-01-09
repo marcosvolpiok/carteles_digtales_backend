@@ -4,7 +4,7 @@ const poster = require('../models/PosterModel');
 
 class posterRepository extends Interface(baseRepository) {
     constructor() {
-        super();
+        // super();
         this.poster=new Poster(); 
     }
 
@@ -18,6 +18,9 @@ class posterRepository extends Interface(baseRepository) {
     async delete (params){
       
     }
+    async remove (params){
+      return await this.poster.remove(params);
+    }
 
     async update (params) {
       return await this.poster.update(params.where, params.set);
@@ -30,6 +33,8 @@ class posterRepository extends Interface(baseRepository) {
     async findOne (params) {
       return await this.poster.findOne(params);
     }
+
+
 }
 
 module.exports = posterRepository;
