@@ -4,20 +4,21 @@ const posterController = require('../controllers/posterController');
 const multer = require('multer');
 const upload = multer({ dest: 'upload/'});
 const type = upload.single('file');
+const checkAuth = require('../middleware/checkAuth');
 
 
-router.post('/addImage', type, posterController.addImage);
+router.post('/addImage', checkAuth, type, posterController.addImage);
 
-router.post('/add', posterController.add);
+router.post('/add', checkAuth, posterController.add);
 
 
-router.get('/list', posterController.getPoster);
+router.get('/list', checkAuth, posterController.getPoster);
 
-router.get('/:id', posterController.getPosterById);
+router.get('/:id', checkAuth, posterController.getPosterById);
 
-router.post('/update/:id', posterController.update);
+router.post('/update/:id', checkAuth, posterController.update);
 
-router.delete('/remove/:id', posterController.remove);
+router.delete('/remove/:id', checkAuth, posterController.remove);
 
 
 module.exports = router;
