@@ -1,7 +1,8 @@
 class productService {
     constructor(messageRepository) {
         this.messageRepository=messageRepository;
-        this.PosterRepository = require('../repository/posterRepository');
+        const posterRepository = require('../repository/posterRepository');
+        this.PosterRepository = new posterRepository();
         this.moment = require('moment');
         this.fs = require('fs');
     }
@@ -9,7 +10,7 @@ class productService {
     add = async (req, res) => {
         const data=req.body;
         data['user'] = res.userData.userId;
-        const poster = new this.PosterRepository(data);
+        
         await poster.save();
         
         return poster;

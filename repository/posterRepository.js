@@ -3,12 +3,20 @@ const baseRepository = require('./baseRepository');
 const poster = require('../models/PosterModel');
 
 class posterRepository extends Interface(baseRepository) {
-    constructor(data) {
+    constructor() {
         super();
-        this.poster=new poster(); 
+        this.poster=new Poster(); 
     }
 
     async add (params) {
+    }
+
+    async list (){
+
+    }
+
+    async delete (params){
+      
     }
 
     async update (params) {
