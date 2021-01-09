@@ -59,6 +59,14 @@ const remove = async (req, res) => {
 }
 
 
+const getByUserId = async (req, res) => {
+  try {
+    const poster = await posterServiceOb.getPosterByUserId(req, res);
+    res.json(poster);
+  } catch (error) {
+      res.status(500).json({message : error.message})
+  }
+}
 
 module.exports = {
   add,
@@ -66,5 +74,6 @@ module.exports = {
   getPosterById,
   update,
   remove,
-  addImage
+  addImage,
+  getByUserId
 }

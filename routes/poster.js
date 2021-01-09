@@ -14,6 +14,10 @@ router.post('/add', checkAuth, posterController.add);
 
 router.get('/list', checkAuth, posterController.getPoster);
 
+router.get('/listByUserId/:id', posterController.getByUserId);
+
+
+
 router.get('/:id', checkAuth, posterController.getPosterById);
 
 router.post('/update/:id', checkAuth, posterController.update);
