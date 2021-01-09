@@ -1,39 +1,38 @@
 const Interface = require('es6-interface');
 const baseRepository = require('./baseRepository');
-const Poster = require('../models/PosterModel');
 
 class posterRepository extends Interface(baseRepository) {
     constructor() {
         super();
-        this.poster=new Poster(); 
+        this.PosterModel = require('../models/PosterModel');
     }
 
     async add (params) {
-      const poster = new Poster(data);
+      const poster = new this.PosterModel(params);
       return await poster.save();
     }
 
     async list (){
-
+      return this.PosterModel.find(params);
     }
 
     async delete (params){
       
     }
     async remove (params){
-      return await this.poster.remove(params);
+      return await this.PosterModel.remove(params);
     }
 
     async update (params) {
-      return await this.poster.update(params.where, params.set);
+      return await this.PosterModel.update(params.where, params.set);
     }
 
     async find (params) {
-      return this.poster.find(params);
+      return this.PosterModel.find(params);
     }
 
     async findOne (params) {
-      return await this.poster.findOne(params);
+      return await this.PosterModel.findOne(params);
     }
 
 
