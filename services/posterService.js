@@ -7,7 +7,7 @@ class posterService {
         this.fs = require('fs');
     }
 
-    add = async (req, res) => {
+    async add(req, res) {
         const data=req.body;
         data['user'] = res.userData.userId;
         const PosterRepository = this.PosterRepository.add(data);
@@ -16,7 +16,7 @@ class posterService {
         return PosterRepository;
     }  
     
-    addImage = async (req, res) => {
+    async addImage(req, res) {
         const _this = this;
         const _req= req;
 
@@ -48,27 +48,27 @@ class posterService {
     }    
 
 
-    getPoster = async (res) => {
+    async getPoster(res) {
         const poster = await this.PosterRepository.find({user: res.res.userData.userId});
 
         return poster;
     }
 
-    getPosterById = async (req) => {
+    async getPosterById(req) {
         const { id } = req.params;
         const poster = await this.PosterRepository.findOne({_id: id});
 
         return poster;
     }
 
-    getPosterByUserId = async (req, res) => {
+    async getPosterByUserId(req) {
         const { id } = req.params;
         const poster = await this.PosterRepository.find({user: id});
 
         return poster;
     }
 
-    update = async (req, res) => {
+    async update(req, res) {
         let { id } = req.params;
         const params = {
             where: {_id: id},
@@ -80,7 +80,7 @@ class posterService {
         return poster;
     }
 
-    remove = async (req) => {
+    async remove(req) {
         let { id } = req.params;
         const poster = await this.PosterRepository.remove({_id: id});
 
