@@ -13,7 +13,7 @@ class userService {
         this.userRepository = new userRepository();
     }
 
-    list = async ()=>{
+    async list() {    
         try {
             const users = await this.userRepository.find();
             
@@ -23,7 +23,7 @@ class userService {
         }
     }
 
-    signup = async (req,res)=>{
+    async signup(req,res) {
         try {
             const existingUser = await this.userRepository.find({email:req.body.email})
             if(existingUser.length !== 0){
@@ -51,19 +51,19 @@ class userService {
         }
     }
 
-    updateUser = async (req) => {
+    async updateUser (req) {
         const user = await this.userRepository.updateMany(req, req);
         return user;
     }
 
-    remove = async (req) => {
+    async remove (req) {
         let { userID } = req.params;
         console.log('dddddddddddddddddddddddddddddd', userID);
         const user = await this.userRepository.remove({_id: userID});
         return user;
     }
 
-    login = async(req, res)=>{
+    async login(req, res) {
         const user = await this.userRepository.findOne({email : req.body.email });
         try{
         if(user){
