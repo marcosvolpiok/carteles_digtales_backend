@@ -75,7 +75,6 @@ class posterService {
             set: req.body
         };
         const poster = await this.PosterRepository.update(params);
-        global.io.emit('action', 'ALGOOOOOOOOOOOOOOOOOO');
 
         return poster;
     }

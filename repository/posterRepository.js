@@ -24,7 +24,9 @@ class posterRepository extends Interface(baseRepository) {
     }
 
     async update (params) {
-      return await this.PosterModel.update(params.where, params.set).exec();
+      const poster=await this.PosterModel.update(params.where, params.set).exec();
+      global.io.emit('action', 'ALGOOOOOOOOOOOOOOOOOO');
+      return poster;
     }
 
     async find (params) {
