@@ -63,7 +63,7 @@ class posterService {
 
     async getPosterByUserId(req) {
         const { id } = req.params;
-        const poster = await this.PosterRepository.findOne({user: id});
+        const poster = await this.PosterRepository.find({user: id});
 
         return poster;
     }
