@@ -1,27 +1,33 @@
 const Interface = require('es6-interface');
 const baseRepository = require('./baseRepository');
-const user = require('../models/UserModel');
 
 class userRepository extends Interface(baseRepository) {
     constructor() {
         super();
-        this.user=user;
+        this.UserModel = require('../models/UserModel');
     }
 
     async list () {
-        const servers = await this.Server.findAll({ attributes: ['id', 'server', 'description', 'server_type', 'created_at'] });
-        return servers;
     }
 
     async add (params) {
-        const server = await this.Server.create(params);
-        return server;
+        const user = new this.UserModel(params);
+
+        return await user.save();
     }
 
     update (params) {
     }
 
     delete (params) {
+    }
+
+    async find (params) {
+        return await this.UserModel.find(params);
+    }
+  
+    async findOne (params) {
+        return await this.UserModel.findOne(params);
     }
 }
 

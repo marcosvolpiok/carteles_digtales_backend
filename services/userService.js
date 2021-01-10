@@ -9,11 +9,13 @@ class userService {
         this.verifyPassword = require('../helpers/loginHelper').verifyPassword;
         this.getToken = require('../helpers/loginHelper');
         const _this=this;
+        const userRepository = require('../repository/userRepository');
+        this.userRepository = new userRepository();
     }
 
     list = async ()=>{
         try {
-            const users = await this.UserModel.find();
+            const users = await this.userRepository.find();
             
             return users;
         } catch (error) {
@@ -23,38 +25,46 @@ class userService {
 
     signup = async (req,res)=>{
         try {
-            const existingUser = await this.UserModel.find({email:req.body.email})
+            const existingUser = await this.userRepository.find({email:req.body.email})
             if(existingUser.length !== 0){
-                return {status: 409, message: "The User does exist"};
+                res.status(409).send({"message": "The User does exist"});
             }
             const hashPassword = await this.bcrypt.hash(req.body.password, 10);
+            /*
+            TO-DO: VERIFICAR SI ESTÁ BIEN HABER SACADO ESTO
             const user = new this.UserModel({
                 name: req.body.name,
                 email: req.body.email,
                 password: hashPassword,
             });
            const createdUser = await user.save();
+            */
+           const createdUser = await this.userRepository.add({
+            name: req.body.name,
+            email: req.body.email,
+            password: hashPassword,
+            });
 
-           return {status: 200, data: createdUser}
+           return {status: 200, data: createdUser, xxxx: 1233}
         } catch (error) {
             throw new Error(error);
         }
     }
 
     updateUser = async (req) => {
-        const user = await this.UserModel.updateMany({_id : req.params.user_id},{$set : req.body}).exec();
+        const user = await this.userRepository.updateMany(req, req);
         return user;
     }
 
     remove = async (req) => {
         let { userID } = req.params;
         console.log('dddddddddddddddddddddddddddddd', userID);
-        const user = await this.UserModel.remove({_id: userID}).exec();
+        const user = await this.userRepository.remove({_id: userID});
         return user;
     }
 
     login = async(req, res)=>{
-        const user = await this.UserModel.findOne({email : req.body.email }).exec();
+        const user = await this.userRepository.findOne({email : req.body.email });
         try{
         if(user){
             const rest = this.verifyPassword(user,req,res);

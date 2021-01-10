@@ -13,18 +13,18 @@ class posterRepository extends Interface(baseRepository) {
     }
 
     async list (){
-      return this.PosterModel.find(params);
+      return this.PosterModel.find(params).exec();
     }
 
     async delete (params){
       
     }
     async remove (params){
-      return await this.PosterModel.remove(params);
+      return await this.PosterModel.remove(params).exec();
     }
 
     async update (params) {
-      return await this.PosterModel.update(params.where, params.set);
+      return await this.PosterModel.update(params.where, params.set).exec();
     }
 
     async find (params) {
@@ -33,6 +33,10 @@ class posterRepository extends Interface(baseRepository) {
 
     async findOne (params) {
       return await this.PosterModel.findOne(params);
+    }
+
+    async updateMany (where, set){
+      return await this.PosterModel.updateMany({_id : where.params.user_id}, {$set : set.body});
     }
 
 
