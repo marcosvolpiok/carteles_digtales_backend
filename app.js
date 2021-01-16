@@ -39,9 +39,13 @@ if (process.env.MONGO_DB_USER) {
 //export DATABASE_URL=mongodb://localhost/digital_posters
 //export JWT_KEY=1234
 //mongoose.connect('mongodb+srv://admin-user:AO8Cs8KLAOqRMwvU@cluster0.qdhog.mongodb.net/minesweeper?retryWrites=true&w=majority')
+
+/*
 mongoose.connect(`${process.env.DATABASE_URL}`,mongoOptions)
     //.then(() => console.log("MongoDB conected ..."))
     .catch(err => console.log(err));
+    */
+mongoose.connect(`${process.env.DATABASE_URL}`, {useUnifiedTopology: true, useNewUrlParser: true, useCreateIndex: true });
 //START SERVER
 
 //import express from 'express';
