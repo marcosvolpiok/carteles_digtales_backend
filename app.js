@@ -54,6 +54,8 @@ const Server=require('socket.io');
 const server = app.listen(3050);
 io = new Server(server, { cors: { origin: '*' } });
 
+console.log('listening at port 3050');
+
 io.on('connection', function(socket){
   socket.on('action', function(action){
     io.emit('action', 'CONECTADO');
