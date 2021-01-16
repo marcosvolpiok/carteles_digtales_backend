@@ -51,7 +51,9 @@ mongoose.connect(`${process.env.DATABASE_URL}`, {useUnifiedTopology: true, useNe
 //import express from 'express';
 const Server=require('socket.io');
 
-const server = app.listen(3050, '0.0.0.0');
+const port = process.env.PORT || 3050;
+
+const server = app.listen(port, '0.0.0.0');
 io = new Server(server, { cors: { origin: '*' } });
 
 console.log('listening at port 3050');
