@@ -5,6 +5,7 @@ class posterService {
         this.PosterRepository = new posterRepository();
         this.moment = require('moment');
         this.fs = require('fs');
+        this.cloudinary = require('cloudinary').v2;
     }
 
     async add(req, res) {
@@ -16,10 +17,36 @@ class posterService {
         return PosterRepository;
     }  
     
+
     async addImage(req, res) {
         const _this = this;
         const _req= req;
 
+        this.cloudinary.config({ 
+            cloud_name: process.env.CLOUDINARY_CLOUD_NAME, 
+            api_key: CLOUDINARY_API_KEY, 
+            api_secret: CLOUDINARY_SECRET_KEY
+        });
+
+
+        let poster=null;
+        this.cloudinary.uploader.upload(req.file.path, async function(error, result) {
+            console.log('xxxxxxxxx', result, error)
+            const params = {
+                where: {_id: _req.body.id},
+                set: {file_path: result.secure_url}
+            };
+            poster = await _this.PosterRepository.update(params);
+        });
+
+        return poster;
+
+        
+        /* SAVE IN FS --- OLD WAY ---
+        const _this = this;
+        const _req= req;
+
+    
         const destPath=`upload\\posters\\${req.body.id}\\${req.file.originalname}\\${this.moment().format("DD-MM-YY, h-mm-ss")} HS_${req.file.filename}_${req.file.originalname}`;
         if (!this.fs.existsSync(`upload/posters/`)){
             this.fs.mkdirSync(`upload/posters/`);
@@ -45,6 +72,7 @@ class posterService {
             return poster;
         });
         src.on('error', function(err) { throw new Error('An error occurred copying the image'); });
+        */
     }    
 
 
